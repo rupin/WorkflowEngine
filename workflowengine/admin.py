@@ -4,24 +4,21 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import *
+from workflowengine.models import CustomUserModel, FlowModel, FieldModel, FormModel, FormFieldModel
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
-    model = CustomUser
-    
+    model = CustomUserModel.CustomUser	
 
-class CaseUserAdmin(UserAdmin):    
-	model = Flow
-	
 
-class DocumentUserAdmin(UserAdmin):    
-	model = Document
 	
 
 
-admin.site.register(CustomUser, CustomUserAdmin)
-admin.site.register(Flow)
-admin.site.register(Document)
+admin.site.register(CustomUserModel.CustomUser, CustomUserAdmin)
+admin.site.register(FieldModel.Field)
+admin.site.register(FlowModel.Flow)
+admin.site.register(FormModel.Form)
+admin.site.register(FormFieldModel.FormField)
+
 
