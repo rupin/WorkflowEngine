@@ -10,3 +10,4 @@ google-cloud-storage
 python-dateutil==2.8.0
 django-import-export
 django-river
+djangorestframework

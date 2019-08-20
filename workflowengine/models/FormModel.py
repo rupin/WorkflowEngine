@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.files.storage import default_storage
 from river.models.fields.state import StateField
 from river.models import State
-from .FlowModel import Flow
+
 
 
 class Form(models.Model):	
