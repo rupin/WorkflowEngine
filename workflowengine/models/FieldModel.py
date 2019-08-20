@@ -12,7 +12,7 @@ class Field(models.Model):
 	
 
 
-	FIELD_CHOICES = (
+	FIELD_DISPLAY = (
 						('NONE', 'NONE'),
 						("FULLDATE", "FULLDATE"),
 						("DATE", "DATE"),
@@ -22,8 +22,19 @@ class Field(models.Model):
 						('CHECK_BOX','CHECK_BOX'),
 						('MULTICHOICE','MULTICHOICE')
 					)
+	
+	field_display = models.CharField(max_length=20,choices=FIELD_DISPLAY,default="NONE")	
 
-	field_display = models.CharField(max_length=20,choices=FIELD_CHOICES,default="NONE")	
+	FIELD_TYPE = (
+						('TEXT', 'TEXT'),
+						("LONG_TEXT", "LONG_TEXT"),
+						("DATE", "DATE"),						
+						('FULLDATE_TEXT_MONTH','FULLDATE_TEXT_MONTH'),
+						('CHECK_BOX','CHECK_BOX'),
+						('MULTICHOICE','MULTICHOICE')
+				)
+
+	field_type=models.CharField(max_length=20,choices=FIELD_TYPE,default="TEXT")	
 	multichoice_options=models.CharField(max_length=200,default='')
 	def __str__(self):
 		return self.field_description
