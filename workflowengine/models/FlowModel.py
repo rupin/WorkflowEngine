@@ -7,13 +7,12 @@ from river.models import State
 from .CustomUserModel import CustomUser
 
 
-class Flow(models.Model):
-	user=models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-	stage= StateField()
+class Flow(models.Model):	
+	stage= StateField(editable=False)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	def __str__(self):
-		return self.id
+		return str(self.id)
 	class Meta:
 		app_label="workflowengine"
 

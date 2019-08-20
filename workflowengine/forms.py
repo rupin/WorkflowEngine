@@ -10,10 +10,10 @@ class CustomUserCreationForm(UserCreationForm):
 
 	class Meta(UserCreationForm):
 		model = CustomUser
-		fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+		fields = '__all__'
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email')
+        fields = '__all__'
