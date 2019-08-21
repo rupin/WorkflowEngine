@@ -1,16 +1,15 @@
 
 from django.db import models
 from .FlowModel import Flow
-from .FieldModel import Field
-from .FormModel import Form
-from .CustomUserModel import CustomUser
 
+from .FormFieldModel import FormField
+from .CustomUserModel import CustomUser
+from django.conf import settings
 
 class FormData(models.Model):
 	#pass	
-	form=models.ForeignKey(Form, on_delete=models.CASCADE)
-	field=models.ForeignKey(Field, on_delete=models.CASCADE)
-	user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)	
+	formfield=models.ForeignKey(FormField, on_delete=models.PROTECT)
+	user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 	file=models.FileField(null=True)
 	text=models.CharField(max_length=500,default="",null=True) 	
 	class Meta:

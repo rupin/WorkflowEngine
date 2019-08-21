@@ -24,6 +24,10 @@ class FlowAdmin(ImportExportModelAdmin):
 	model=FlowModel.Flow
 	list_display=['stage','created_at','updated_at']
 
+class FormFieldAdmin(ImportExportModelAdmin):
+	model=FormFieldModel.FormField
+	list_display=['form','field','index', 'mandatory']
+
 class UserFlowAdmin(ImportExportModelAdmin):
 	model=UserFlowModel.UserFlow
 	list_display=['user','flow','created_at','updated_at']
@@ -33,7 +37,7 @@ admin.site.register(CustomUserModel.CustomUser, CustomUserAdmin)
 admin.site.register(FieldModel.Field)
 admin.site.register(FlowModel.Flow,FlowAdmin)
 admin.site.register(FormModel.Form)
-admin.site.register(FormFieldModel.FormField)
+admin.site.register(FormFieldModel.FormField,FormFieldAdmin)
 admin.site.register(RoleModel.Role)
 admin.site.register(UserFlowModel.UserFlow,UserFlowAdmin)
 

@@ -7,38 +7,27 @@ from river.models import State
 
 
 class Field(models.Model):	
-	field_description=models.CharField(max_length=200, default='')
-	field_question=models.CharField(max_length=300, default='')
-	
-
-
-	FIELD_DISPLAY = (
-						('NONE', 'NONE'),
-						("FULLDATE", "FULLDATE"),
-						("DATE", "DATE"),
-						("MONTH", "MONTH"),
-						("YEAR", "YEAR"),
-						('FULLDATE_TEXT_MONTH','FULLDATE_TEXT_MONTH'),
-						('CHECK_BOX','CHECK_BOX'),
-						('MULTICHOICE','MULTICHOICE')
-					)
-	
-	field_display = models.CharField(max_length=20,choices=FIELD_DISPLAY,default="NONE")	
+	description=models.CharField(max_length=200, default='')
+	question=models.CharField(max_length=300, default='', null=True,blank=True)
+	label=models.CharField(max_length=200, default='')	
 
 	FIELD_TYPE = (
 						('TEXT', 'TEXT'),
 						("LONG_TEXT", "LONG_TEXT"),
-						("DATE", "DATE"),						
-						('FULLDATE_TEXT_MONTH','FULLDATE_TEXT_MONTH'),
+						("DATE", "DATE"),
+						("DATETIME", "DATETIME"),						
 						('CHECK_BOX','CHECK_BOX'),
-						('MULTICHOICE','MULTICHOICE')
+						('MULTICHOICE','MULTICHOICE'),
+						('RADIO', 'RADIO'),
+						('FILE', 'FILE')
 				)
 
 	field_type=models.CharField(max_length=20,choices=FIELD_TYPE,default="TEXT")	
-	multichoice_options=models.CharField(max_length=200,default='', null=True)
+	multichoice_options=models.CharField(max_length=200,default='', null=True, blank=True)
 
 	def __str__(self):
-		return self.field_description
-	class Meta:
-		
+		return self.description
+
+
+	class Meta:		
 		app_label="workflowengine"
