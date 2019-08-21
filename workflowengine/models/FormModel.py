@@ -8,7 +8,7 @@ from river.models import State
 
 
 class Form(models.Model):	
-	stage=models.ForeignKey(State, on_delete=models.CASCADE)
+	stage=models.ForeignKey(State, on_delete=models.CASCADE, null=True)
 	description=models.CharField(max_length=200,default="")
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)

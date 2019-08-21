@@ -16,4 +16,5 @@ class Flow(models.Model):
 		return str(self.id)
 	class Meta:
 		app_label="workflowengine"
+		ordering=['created_at']
 

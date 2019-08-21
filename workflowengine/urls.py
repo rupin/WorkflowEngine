@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from .apiviews.FieldAPIView import *
+from .apiviews.FormFieldAPIView import *
+from .apiviews.UserFlowAPIView import *
+from .apiviews.FormDataAPIView import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +29,10 @@ urlpatterns = [
     path('createField/', FieldCreate.as_view()),
     path('viewFields/', FieldList.as_view()),
     path('rest-auth/', include('rest_auth.urls')),
+    path('getFormFields/', FormFieldList.as_view()),
+    path('getPendingFlows/', getPendingFlows.as_view()),
+    path('getCompletedFlows/', getCompletedFlows.as_view()),
+    path('getFieldData/<int:flow_id>', FormDataList.as_view()),
+    
     
 ]
