@@ -21,6 +21,9 @@ from .apiviews.FieldAPIView import *
 from .apiviews.FormFieldAPIView import *
 from .apiviews.UserFlowAPIView import *
 from .apiviews.FormDataAPIView import *
+from workflowengine.riverapiviews.StateAPIView import *
+from workflowengine.riverapiviews.TransitionApprovalAPIView import *
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +36,16 @@ urlpatterns = [
     path('getPendingFlows/', getPendingFlows.as_view()),
     path('getCompletedFlows/', getCompletedFlows.as_view()),
     path('getFieldData/<int:flow_id>', FormDataList.as_view()),
+    path('getFieldData/<int:flow_id>/<int:stage>', FormDataListByStage.as_view()),
+    
+    path('getStates/', StateList.as_view()),
+    
+    path('getFlowHistory/<int:flow_id>', getFlowHistory.as_view()),
+    path('getTransition/<int:flow_id>', availableTransitionApprovals.as_view()),
+
+
+    
+    
     
     
 ]

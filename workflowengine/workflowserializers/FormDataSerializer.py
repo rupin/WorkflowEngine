@@ -7,15 +7,6 @@ class FormDataSerializer(serializers.ModelSerializer):
 	user=CustomUserSerializer()
 	class Meta:
 		model = FormData
-		fields = ['file', 'text', 'flow', 'created_at', 'updated_at','formfield', 'user']
-
-	def to_representation(self, obj):
-		"""Move fields from profile to user representation."""
+		fields = ['file', 'text', 'updated_at','formfield', 'user']
 		
-
-		representation = super().to_representation(obj)
-		formfield_representation = representation.pop('formfield')
-		for key in formfield_representation:
-			representation[key] = formfield_representation[key]
-
-		return representation
+	

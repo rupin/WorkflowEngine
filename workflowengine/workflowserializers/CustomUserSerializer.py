@@ -6,8 +6,8 @@ from workflowengine.workflowserializers.RoleSerializer import RoleSerializer
 class CustomUserSerializer(serializers.ModelSerializer):
 	role=RoleSerializer()	
 	class Meta:
-		model = CustomUser
-		fields = ['role']
+		model = CustomUser		
+		exclude=['password', 'last_login', 'is_staff', 'is_active', 'date_joined', 'groups', 'is_superuser']
 
 
 	def to_representation(self, obj):
@@ -16,5 +16,4 @@ class CustomUserSerializer(serializers.ModelSerializer):
 		profile_representation = representation.pop('role')
 		for key in profile_representation:
 			representation[key] = profile_representation[key]
-
 		return representation
