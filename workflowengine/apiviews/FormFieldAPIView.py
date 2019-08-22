@@ -11,18 +11,13 @@ from django.db.models import Q
 
 from workflowengine.models.UserFlowModel import UserFlow
 from workflowengine.models.FlowModel import Flow
-class FormFieldList(generics.ListAPIView):   
+
+class FormFieldsByStage(generics.ListAPIView):   
     
     serializer_class = FormFieldSerializer
 
     def get_queryset(self):
         logged_in_user = self.request.user
-        
-        in_progress_flows=UserFlow.objects.filter(
-        											Q(user=logged_in_user) &
-        											Q(flow__completed=False)
-        										).values('flow__stage')
-
-        fieldsData=FormField.objects.filter(Q(stage__in=in_progress_flows))
-
+        stage_id=self.kwargs['stage']   
+        fieldsData=FormField.objects.filter(stage=stage_id)
         return fieldsData

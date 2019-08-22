@@ -1,6 +1,6 @@
 from workflowengine.models.FormDataModel import FormData
 from workflowengine.models.UserFlowModel import UserFlow
-from workflowengine.workflowserializers.FormDataSerializer import FormDataSerializer
+from workflowengine.workflowserializers.FormDataSerializer import *
 
 
 from rest_framework import generics
@@ -14,18 +14,16 @@ from workflowengine.permissions.UserPermittedOnFlow import UserPermittedOnFlow
 
 class FormDataList(generics.ListAPIView):  
     
-	serializer_class = FormDataSerializer
+	serializer_class = GenericFormDataSerializer
 	permission_classes = [UserPermittedOnFlow]
 	def get_queryset(self):
-		flow_id = self.kwargs['flow_id']
-		
-		logged_in_user = self.request.user
-		
+		flow_id = self.kwargs['flow_id']		
+		logged_in_user = self.request.user		
 		return FormData.objects.filter(flow=flow_id)
 
 class FormDataListByStage(generics.ListAPIView):  
     
-	serializer_class = FormDataSerializer
+	serializer_class = GenericFormDataSerializer
 	permission_classes = [UserPermittedOnFlow]
 	def get_queryset(self):
 		flow_id = self.kwargs['flow_id']
@@ -33,4 +31,26 @@ class FormDataListByStage(generics.ListAPIView):
 		logged_in_user = self.request.user
 		
 		return FormData.objects.filter(Q(flow=flow_id) & Q(formfield__stage=stage_id))
+
+class FormDataByFormField(generics.RetrieveUpdateAPIView):  
+    
+	serializer_class = FormDataSerializer
+	permission_classes = [UserPermittedOnFlow]
+	lookup_field='formfield'
+	def get_queryset(self):
+		flow_id = self.kwargs['flow_id']
+		formfieldID=self.kwargs['formfield']
+		logged_in_user = self.request.user		
+		return FormData.objects.filter(flow=flow_id,formfield=formfieldID)
+
+class CreateFormData(generics.CreateAPIView):  
+    
+	serializer_class = FormDataSerializer
+	permission_classes = [UserPermittedOnFlow]
+
+	def get_queryset(self):
+		flow_id = self.kwargs['flow_id']
+		formfieldID=self.kwargs['pk']
+		logged_in_user = self.request.user		
+		return FormData.objects.filter(flow=flow_id,formfield=formfieldID)
 				

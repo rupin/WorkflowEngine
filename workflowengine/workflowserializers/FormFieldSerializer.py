@@ -6,5 +6,5 @@ class FormFieldSerializer(serializers.ModelSerializer):
 	#field= FieldSerializer()
 	class Meta:
 		model = FormField
-		fields = "__all__"
+		fields = ['field', 'id', 'mandatory', 'index']
 		depth = 1

@@ -32,11 +32,13 @@ urlpatterns = [
     path('createField/', FieldCreate.as_view()),
     path('viewFields/', FieldList.as_view()),
     path('rest-auth/', include('rest_auth.urls')),
-    path('getFormFields/', FormFieldList.as_view()),
+    path('FormFieldsByStage/<int:stage>', FormFieldsByStage.as_view()),
     path('getPendingFlows/', getPendingFlows.as_view()),
     path('getCompletedFlows/', getCompletedFlows.as_view()),
     path('getFieldData/<int:flow_id>', FormDataList.as_view()),
     path('getFieldData/<int:flow_id>/<int:stage>', FormDataListByStage.as_view()),
+    path('getFieldDataByFormField/<int:flow_id>/<int:formfield>', FormDataByFormField.as_view()),
+    path('saveFormData/<int:flow_id>/<int:formfield>', CreateFormData.as_view()),
     
     path('getStates/', StateList.as_view()),
     
