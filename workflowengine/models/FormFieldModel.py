@@ -16,3 +16,7 @@ class FormField(models.Model):
 	class Meta:
 		app_label="workflowengine"
 		ordering=['index']
+		unique_together =['form', 'field', 'stage']
+
+
+

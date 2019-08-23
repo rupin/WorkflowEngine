@@ -35,15 +35,18 @@ urlpatterns = [
     path('FormFieldsByStage/<int:stage>', FormFieldsByStage.as_view()),
     path('getPendingFlows/', getPendingFlows.as_view()),
     path('getCompletedFlows/', getCompletedFlows.as_view()),
-    path('getFieldData/<int:flow_id>', FormDataList.as_view()),
-    path('getFieldData/<int:flow_id>/<int:stage>', FormDataListByStage.as_view()),
-    path('getFieldDataByFormField/<int:flow_id>/<int:formfield>', FormDataByFormField.as_view()),
-    path('saveFormData/<int:flow_id>/<int:formfield>', CreateFormData.as_view()),
+
+    path('getFieldDataByFlow/<int:flow_id>', FormDataView.as_view()),
+    #path('getFieldDataByStage/<int:flow_id>/<int:stage>', FormDataByStage.as_view()),
+    path('RetrieveUpdateFormData/<int:flow_id>/<int:pk>', RetrieveUpdateFormData.as_view()),
+
+    path('createFormData/<int:flow_id>', createFormData.as_view()),
     
     path('getStates/', StateList.as_view()),
     
     path('getFlowHistory/<int:flow_id>', getFlowHistory.as_view()),
     path('getTransition/<int:flow_id>', availableTransitionApprovals.as_view()),
+    path('approveStage/<int:flow_id>/<int:stage>', approveStage.as_view()),
 
 
     

@@ -1,6 +1,7 @@
 from workflowengine.models.UserFlowModel import UserFlow
 from rest_framework import serializers
 from workflowengine.workflowserializers.FlowSerializer import FlowSerializer
+from workflowengine.workflowserializers.CustomUserSerializer import CustomUserSerializer
 
 class UserFlowSerializer(serializers.ModelSerializer):
 	
