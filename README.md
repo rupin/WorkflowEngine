@@ -2,7 +2,7 @@
 
 ###### Method that accepts username and password, returns a token. this token to be put in the header of every subsequent request
 
-```http://localhost:8000/rest-auth/login/ POST ```
+```http://localhost:8000/rest-auth/login/```
 
 
 
