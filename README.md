@@ -38,7 +38,8 @@ http://localhost:8000/getTransition/<flow_id>
 
 ###### Each Field will have a Unique key called Formfield, which identifies the field in this specific stage. It also has field details for rendering, and fields are sorted as the user expected them to be. 
 
-```http://localhost:8000/FormFieldsByStage/<int:stage>
+``` 
+http://localhost:8000/FormFieldsByStage/<int:stage>
 ```
 
 
@@ -47,13 +48,15 @@ http://localhost:8000/getTransition/<flow_id>
 ###### Extract Field Data by Flow and Stage 
 
 
-```http://localhost:8000/getFieldData/<int:flow_id>/<int:stage>
+``` 
+http://localhost:8000/getFieldData/<int:flow_id>/<int:stage>
 ```
 
 #### Get Specific Field Data by Flow and formdata_id(GET), and also update it (POST)
 ###### Once you get the form fields, it is necessary to fill them up if they were saved by draft, or if the user went away form the app. You can extract data field wise and refill it. 
 
-```http://localhost:8000/RetrieveUpdateFormData/<int:flow_id>/<int:formdata_id>
+``` 
+http://localhost:8000/RetrieveUpdateFormData/<int:flow_id>/<int:formdata_id>
 ```
 
 
@@ -61,13 +64,15 @@ http://localhost:8000/getTransition/<flow_id>
 
 ###### Once you get the form fields, some fields will be empty. You need to create the data for the formfield and the flow. Once it is created, revert to updating it. 
 
-```http://localhost:8000/createFormData/<int:flow_id>/<int:formfield>
+``` 
+http://localhost:8000/createFormData/<int:flow_id>/<int:formfield>
 ```
 
 
 #### Validate  and Approve a Stage (GET)
 ###### Server side validation is performed which returns if the data is valid for a field.  If everything checks out, the stage finally gets approved
 
-```http://localhost:8000/approveStage/<int:flow_id>/<int:stage>
+```
+http://localhost:8000/approveStage/<int:flow_id>/<int:stage>
 ```
 
