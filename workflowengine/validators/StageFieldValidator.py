@@ -16,5 +16,6 @@ class StageFieldValidator():
 				errors=True
 				error["message"]="The Field is mandatory"
 				error["formfield"]=formFieldID
+				error['type']="validation"
 				errorsList.append(error)
 		return errorsList, errors	

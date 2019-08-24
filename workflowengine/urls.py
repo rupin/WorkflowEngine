@@ -26,8 +26,7 @@ from workflowengine.riverapiviews.TransitionApprovalAPIView import *
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    url(r'api-auth/', include('rest_framework.urls')),
+    path('admin/', admin.site.urls),    
     path('modifyField/<pk>', FieldRUD.as_view()),
     path('createField/', FieldCreate.as_view()),
     path('viewFields/', FieldList.as_view()),
