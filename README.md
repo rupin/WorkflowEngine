@@ -15,16 +15,17 @@
 
 
 
-#### Get Pending Flows
+#### Get Pending Flows (GET) 
 
-######This gets all flows that are currently incomplete and the current logged in user plays a role in them. Extract Flow ID from the API Below. This uniquely designates a Flow. You can have multiple flows pending
+
+###### This gets all flows that are currently incomplete and the current logged in user plays a role in them. Extract Flow ID from the API Below. This uniquely designates a Flow. You can have multiple flows pending
 
 ```http://localhost:8000/getPendingFlows
 ```
 
 
 
-#### Get Pending Transitions in a Flow 
+#### Get Pending Transitions in a Flow (GET)
 
 ###### This Gets the current pending transition/stage within the flow.  This does not filter if the flow is to be actioned by current logged in user. This API is made to ascertain if there is anything pending that belongs to the user, in a specific flow.Each flow has a source and destination ,extract Source Stage ID from the API below
 
@@ -33,7 +34,7 @@ http://localhost:8000/getTransition/<flow_id>
 ```
 
 
-#### Get Specific Fields in a Stage ( Every flow has the same fields in the same stage, so flow ID is not required)
+#### Get Specific Fields in a Stage ( Every flow has the same fields in the same stage, so flow ID is not required) (GET)
 
 ###### Each Field will have a Unique key called Formfield, which identifies the field in this specific stage. It also has field details for rendering, and fields are sorted as the user expected them to be. 
 
@@ -41,7 +42,7 @@ http://localhost:8000/getTransition/<flow_id>
 ```
 
 
-#### Get Completed Field Data by Flow and Stage
+#### Get Completed Field Data by Flow and Stage (GET)
 
 ###### Extract Field Data by Flow and Stage 
 
@@ -64,7 +65,7 @@ http://localhost:8000/getTransition/<flow_id>
 ```
 
 
-#### Validate  and Approve a Stage
+#### Validate  and Approve a Stage (GET)
 ###### Server side validation is performed which returns if the data is valid for a field.  If everything checks out, the stage finally gets approved
 
 ```http://localhost:8000/approveStage/<int:flow_id>/<int:stage>
