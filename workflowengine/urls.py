@@ -21,8 +21,10 @@ from .apiviews.FieldAPIView import *
 from .apiviews.FormFieldAPIView import *
 from .apiviews.UserFlowAPIView import *
 from .apiviews.FormDataAPIView import *
+from .apiviews.FlowAPIView import *
 from workflowengine.riverapiviews.StateAPIView import *
 from workflowengine.riverapiviews.TransitionApprovalAPIView import *
+
 
 
 urlpatterns = [
@@ -46,6 +48,8 @@ urlpatterns = [
     path('getFlowHistory/<int:flow_id>', getFlowHistory.as_view()),
     path('getTransition/<int:flow_id>', availableTransitionApprovals.as_view()),
     path('approveStage/<int:flow_id>/<int:stage>', approveStage.as_view()),
+
+    path('createFlow/', createFlow.as_view()),
 
 
     

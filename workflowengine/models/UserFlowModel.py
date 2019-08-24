@@ -14,3 +14,5 @@ class UserFlow(models.Model):
 		return self.user.username
 	class Meta:
 		app_label="workflowengine"
+
+	
