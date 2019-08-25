@@ -17,39 +17,54 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from .apiviews.FieldAPIView import *
-from .apiviews.FormFieldAPIView import *
-from .apiviews.UserFlowAPIView import *
-from .apiviews.FormDataAPIView import *
-from .apiviews.FlowAPIView import *
+from workflowengine.apiviews.FieldAPIView import *
+from workflowengine.apiviews.FormFieldAPIView import *
+from workflowengine.apiviews.UserFlowAPIView import *
+from workflowengine.apiviews.FormDataAPIView import *
+from workflowengine.apiviews.FlowAPIView import *
+from workflowengine.apiviews.ExpertiseAPIView import *
+from workflowengine.apiviews.ExpertAPIView import *
 from workflowengine.riverapiviews.StateAPIView import *
 from workflowengine.riverapiviews.TransitionApprovalAPIView import *
 
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),    
-    path('modifyField/<pk>', FieldRUD.as_view()),
-    path('createField/', FieldCreate.as_view()),
-    path('viewFields/', FieldList.as_view()),
-    path('rest-auth/', include('rest_auth.urls')),
-    path('FormFieldsByStage/<int:stage>', FormFieldsByStage.as_view()),
-    path('getPendingFlows/', getPendingFlows.as_view()),
-    path('getCompletedFlows/', getCompletedFlows.as_view()),
+    path('admin/', admin.site.urls),   
 
+
+    
+    path('rest-auth/', include('rest_auth.urls')),
+
+
+    #Form Data and Fields
+    path('FormFieldsByStage/<int:stage>', FormFieldsByStage.as_view()),
     path('getFieldDataByFlow/<int:flow_id>', FormDataView.as_view()),
     #path('getFieldDataByStage/<int:flow_id>/<int:stage>', FormDataByStage.as_view()),
     path('RetrieveUpdateFormData/<int:flow_id>/<int:pk>', RetrieveUpdateFormData.as_view()),
-
     path('createFormData/<int:flow_id>', createFormData.as_view()),
     
+
+    #Workflow States
     path('getStates/', StateList.as_view()),
+    path('getInitialState/', InitialState.as_view()),
+    path('getFinalStates/', FinalStates.as_view()),
     
+
+    #Flow Actions
+    path('getPendingFlows/', getPendingFlows.as_view()),
+    path('getCompletedFlows/', getCompletedFlows.as_view()),
     path('getFlowHistory/<int:flow_id>', getFlowHistory.as_view()),
     path('getTransition/<int:flow_id>', availableTransitionApprovals.as_view()),
     path('approveStage/<int:flow_id>/<int:stage>', approveStage.as_view()),
-
     path('createFlow/', createFlow.as_view()),
+
+
+    #Experts
+    path('getExpertiseList/', getExpertise.as_view()),
+    path('getExpertise/<int:user>', getUserExpertInfo.as_view()),
+
+    
 
 
     

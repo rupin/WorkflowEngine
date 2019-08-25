@@ -4,9 +4,11 @@ from django.conf import settings
 from django.core.files.storage import default_storage
 from river.models.fields.state import StateField
 from river.models import State
+import uuid
 
 
 class Field(models.Model):	
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	description=models.CharField(max_length=200, default='')
 	question=models.CharField(max_length=300, default='', null=True,blank=True)
 	label=models.CharField(max_length=200, default='')	

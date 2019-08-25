@@ -6,3 +6,5 @@ from .FormFieldModel import FormField
 from .FormDataModel import FormData
 from .RoleModel import Role
 from .UserFlowModel import UserFlow
+from .ExpertiseModel import Expertise
+from .ExpertModel import Expert

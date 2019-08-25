@@ -6,9 +6,10 @@ from .FormFieldModel import FormField
 from .CustomUserModel import CustomUser
 from .FlowModel import Flow
 from django.conf import settings
+import uuid
 
 class FormData(models.Model):
-	#pass	
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	formfield=models.ForeignKey(FormField, on_delete=models.PROTECT)
 	user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 	flow=models.ForeignKey(Flow,on_delete=models.PROTECT,null=True, blank=True)

@@ -18,11 +18,11 @@ class CustomUserAdmin(UserAdmin):
 
 class FlowAdmin(ImportExportModelAdmin):
 	model=FlowModel.Flow
-	list_display=['id','stage','created_at','updated_at', 'completed']
+	#list_display=['id','stage','created_at','updated_at', 'completed']
 
 class FormFieldAdmin(ImportExportModelAdmin):
 	model=FormFieldModel.FormField
-	list_display=['id','form','field', 'stage','index', 'mandatory']
+	#list_display=['id','form','field', 'stage','index', 'mandatory']
 
 class UserFlowAdmin(ImportExportModelAdmin):
 	model=UserFlowModel.UserFlow
@@ -31,6 +31,10 @@ class UserFlowAdmin(ImportExportModelAdmin):
 class FormDataAdmin(ImportExportModelAdmin):
 	model=FormDataModel.FormData
 	list_display=['id','user','formfield','flow','file','text', 'created_at', 'updated_at']
+
+class ExpertAdmin(ImportExportModelAdmin):
+	model=ExpertModel.Expert
+	list_display=['id','user','expertise','index']
 
 
 admin.site.register(CustomUserModel.CustomUser, CustomUserAdmin)
@@ -41,6 +45,9 @@ admin.site.register(FormFieldModel.FormField,FormFieldAdmin)
 admin.site.register(RoleModel.Role)
 admin.site.register(UserFlowModel.UserFlow,UserFlowAdmin)
 admin.site.register(FormDataModel.FormData,FormDataAdmin)
+
+admin.site.register(ExpertModel.Expert,ExpertAdmin)
+admin.site.register(ExpertiseModel.Expertise)
 
 
 

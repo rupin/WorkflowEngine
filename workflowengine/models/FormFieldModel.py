@@ -4,10 +4,11 @@ from .FlowModel import Flow
 from .FieldModel import Field
 from .FormModel import Form
 from river.models import State
+import uuid
 
 
 class FormField(models.Model):
-	#pass	
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	form=models.ForeignKey(Form, on_delete=models.CASCADE,default=0)
 	field=models.ForeignKey(Field, on_delete=models.CASCADE,default=0)
 	stage=models.ForeignKey(State, on_delete=models.CASCADE,null=True)	
@@ -16,7 +17,7 @@ class FormField(models.Model):
 	class Meta:
 		app_label="workflowengine"
 		ordering=['index']
-		unique_together =['form', 'field', 'stage']
+		#unique_together =['form', 'field', 'stage']
 
 
 
