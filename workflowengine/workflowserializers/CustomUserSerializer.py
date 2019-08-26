@@ -7,7 +7,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 	role=RoleSerializer()	
 	class Meta:
 		model = CustomUser		
-		exclude=['password', 'last_login', 'is_staff', 'is_active', 'date_joined', 'groups', 'is_superuser']
+		exclude=['password', 'restriction_pin','email', 'last_login', 'is_staff', 'is_active', 'date_joined', 'groups', 'is_superuser']
 
 
 	def to_representation(self, obj):

@@ -26,6 +26,7 @@ from workflowengine.apiviews.ExpertiseAPIView import *
 from workflowengine.apiviews.ExpertAPIView import *
 from workflowengine.riverapiviews.StateAPIView import *
 from workflowengine.riverapiviews.TransitionApprovalAPIView import *
+import uuid
 
 
 
@@ -54,9 +55,10 @@ urlpatterns = [
     #Flow Actions
     path('getPendingFlows/', getPendingFlows.as_view()),
     path('getCompletedFlows/', getCompletedFlows.as_view()),
-    path('getFlowHistory/<int:flow_id>', getFlowHistory.as_view()),
-    path('getTransition/<int:flow_id>', availableTransitionApprovals.as_view()),
-    path('approveStage/<int:flow_id>/<int:stage>', approveStage.as_view()),
+    path('getFlowHistory/<uuid:flow_id>', getFlowHistory.as_view()),
+    path('getTransition/<uuid:flow_id>', availableTransitionApprovals.as_view()),
+    path('approveStage/<uuid:flow_id>', approveStage.as_view()),
+    path('approveStage/<uuid:flow_id>/<int:destination>', approveStage.as_view()),
     path('createFlow/', createFlow.as_view()),
 
 

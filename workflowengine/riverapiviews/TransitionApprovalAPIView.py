@@ -14,6 +14,8 @@ from workflowengine.validators.ErrorSerializer import ErrorSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from rest_framework.status import * 
+
 
 class getFlowHistory(generics.ListAPIView):  
     
@@ -29,8 +31,14 @@ class availableTransitionApprovals(generics.ListAPIView):
 	permission_classes = [UserPermittedOnFlow]
 	def get_queryset(self):
 		flow_id=self.kwargs['flow_id']
-		flow=Flow.objects.get(id=flow_id)	
-		return flow.river.stage.get_available_approvals(as_user=self.request.user)		
+		flow=Flow.objects.get(id=flow_id)
+		newQS=[]	
+		transitionApprovals=flow.river.stage.get_available_approvals(as_user=self.request.user)
+		# for transitionApproval in transitionApprovals:
+		# 	#transitionApprovals["isLastState"]=True
+		# 	#transitionApprovals["isFirstState"]=True
+		# 	newQS.append(transitionApprovals)
+		return transitionApprovals		
 
 
 	
@@ -41,19 +49,41 @@ class approveStage(APIView):
 	serializer_class = ErrorSerializer
 	permission_classes = [UserPermittedOnFlow]
 	def get(self, request, **kwargs):
+		#TODO Verify if the destination state is in the set of pending approval states
 		flow_id=self.kwargs['flow_id']
 		flow=Flow.objects.get(id=flow_id)
-		stageid=self.kwargs['stage']	
-		errorList, errors=StageFieldValidator.validateStage(self.request,stageid,flow)
-		#print(errorList)
-		if(not errors):
-			#print("Approving")
-			try:
-				flow.river.stage.approve(as_user=self.request.user)
-			except Exception as e:
-				error={}
-				error['message']=str(e)
-				error['errortype']='exception'
-				errorList.append(error)				
-		return Response(errorList)
+		destination_state=self.kwargs.pop('destination', None)	
+		print(destination_state)	
+		status=[]
+		errorcode=HTTP_200_OK
+		try:
+				
+			source_stage, destination_state=StageFieldValidator.verifyDestinationState(self.request,destination_state, flow)
+			status, errors=StageFieldValidator.validateStage(self.request,source_stage,flow)
+			if(not errors):
+				
+				if(destination_state is None):
+					responsemessage={}
+					responsemessage['message']="No Pending Approval"
+					responsemessage['message_type']='success'
+					errorcode=HTTP_200_OK
+					status.append(responsemessage)
+				else:
+					flow.river.stage.approve(as_user=self.request.user, next_state=destination_state)
+					error={}
+					error['message']="Approved Successfully"
+					error['message_type']='success'
+					errorcode=HTTP_200_OK
+					status.append(error)	
+				
+
+		except Exception as e:
+			error={}
+			error['message']=str(e)
+			error['message_type']='exception'
+			errorcode=HTTP_403_FORBIDDEN
+			status.append(error)				
+		return Response(status, status=errorcode)
+	
+
 	

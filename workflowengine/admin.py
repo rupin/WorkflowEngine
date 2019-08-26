@@ -18,11 +18,11 @@ class CustomUserAdmin(UserAdmin):
 
 class FlowAdmin(ImportExportModelAdmin):
 	model=FlowModel.Flow
-	#list_display=['id','stage','created_at','updated_at', 'completed']
+	list_display=['id','stage','created_at','updated_at', 'completed']
 
 class FormFieldAdmin(ImportExportModelAdmin):
 	model=FormFieldModel.FormField
-	#list_display=['id','form','field', 'stage','index', 'mandatory']
+	list_display=['id','form','field', 'stage','index', 'mandatory']
 
 class UserFlowAdmin(ImportExportModelAdmin):
 	model=UserFlowModel.UserFlow

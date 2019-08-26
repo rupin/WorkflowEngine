@@ -11,6 +11,7 @@ class Flow(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	stage= StateField(editable=False)
 	completed=models.BooleanField(default=False)
+	restricted=models.BooleanField(default=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	def __str__(self):
