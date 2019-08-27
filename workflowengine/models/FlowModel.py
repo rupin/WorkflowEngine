@@ -5,6 +5,7 @@ from django.core.files.storage import default_storage
 from river.models.fields.state import StateField
 from river.models import State
 from .CustomUserModel import CustomUser
+from .WorkflowTypeModel import WorkflowType
 import uuid
 
 class Flow(models.Model):	
@@ -12,11 +13,15 @@ class Flow(models.Model):
 	stage= StateField(editable=False)
 	completed=models.BooleanField(default=False)
 	restricted=models.BooleanField(default=True)
+	flow_type=models.ForeignKey(WorkflowType, on_delete=models.PROTECT, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
+	parent_flow = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
 	def __str__(self):
 		return str(self.id)
 	class Meta:
 		app_label="workflowengine"
 		ordering=['created_at']
+
+	
 

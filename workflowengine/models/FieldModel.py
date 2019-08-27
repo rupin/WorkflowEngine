@@ -21,11 +21,13 @@ class Field(models.Model):
 						('CHECK_BOX','CHECK_BOX'),
 						('MULTICHOICE','MULTICHOICE'),
 						('RADIO', 'RADIO'),
-						('FILE', 'FILE')
+						('FILE', 'FILE'),
+						('CHILD_FLOW_CREATION_BUTTON', 'CHILD_FLOW_CREATION_BUTTON')
 				)
 
 	field_type=models.CharField(max_length=20,choices=FIELD_TYPE,default="TEXT")	
 	multichoice_options=models.CharField(max_length=200,default='', null=True, blank=True)
+	#flow_type=models.ForeignKey(WorkflowType, on_delete=models.PROTECT, blank=True, null=True)	
 
 	def __str__(self):
 		return self.description

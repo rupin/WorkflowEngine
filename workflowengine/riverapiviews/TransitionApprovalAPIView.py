@@ -53,7 +53,7 @@ class approveStage(APIView):
 		flow_id=self.kwargs['flow_id']
 		flow=Flow.objects.get(id=flow_id)
 		destination_state=self.kwargs.pop('destination', None)	
-		print(destination_state)	
+		#print(destination_state)	
 		status=[]
 		errorcode=HTTP_200_OK
 		try:
@@ -65,14 +65,15 @@ class approveStage(APIView):
 				if(destination_state is None):
 					responsemessage={}
 					responsemessage['message']="No Pending Approval"
-					responsemessage['message_type']='success'
+					responsemessage['message_type']='Success'
 					errorcode=HTTP_200_OK
 					status.append(responsemessage)
 				else:
 					flow.river.stage.approve(as_user=self.request.user, next_state=destination_state)
+					finalState=Flow.river.stage.final_states
 					error={}
 					error['message']="Approved Successfully"
-					error['message_type']='success'
+					error['message_type']='Success'
 					errorcode=HTTP_200_OK
 					status.append(error)	
 				
@@ -80,7 +81,7 @@ class approveStage(APIView):
 		except Exception as e:
 			error={}
 			error['message']=str(e)
-			error['message_type']='exception'
+			error['message_type']='Exception'
 			errorcode=HTTP_403_FORBIDDEN
 			status.append(error)				
 		return Response(status, status=errorcode)

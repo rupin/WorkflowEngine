@@ -8,3 +8,4 @@ from .RoleModel import Role
 from .UserFlowModel import UserFlow
 from .ExpertiseModel import Expertise
 from .ExpertModel import Expert
+from .WorkflowTypeModel import WorkflowType

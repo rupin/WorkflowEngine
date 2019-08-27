@@ -34,11 +34,11 @@ class StageFieldValidator():
 
 		validState=False	
 		for pendingStage in pendingStageApproval:
-			print("I have more than one state")
+			#print("I have more than one state")
 			destination_state=pendingStage.destination_state_id
 			source_stage=pendingStage.source_state_id
-			print(requestedDestinationStage)
-			print(destination_state)
+			#print(requestedDestinationStage)
+			#print(destination_state)
 			if(destination_state==requestedDestinationStage):
 				validState=True
 				break

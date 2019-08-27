@@ -18,7 +18,7 @@ class CustomUserAdmin(UserAdmin):
 
 class FlowAdmin(ImportExportModelAdmin):
 	model=FlowModel.Flow
-	list_display=['id','stage','created_at','updated_at', 'completed']
+	list_display=['id','stage','flow_type', 'completed','created_at','updated_at'] 
 
 class FormFieldAdmin(ImportExportModelAdmin):
 	model=FormFieldModel.FormField
@@ -48,6 +48,6 @@ admin.site.register(FormDataModel.FormData,FormDataAdmin)
 
 admin.site.register(ExpertModel.Expert,ExpertAdmin)
 admin.site.register(ExpertiseModel.Expertise)
-
+admin.site.register(WorkflowTypeModel.WorkflowType)
 
 
