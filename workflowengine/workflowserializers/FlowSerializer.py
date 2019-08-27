@@ -14,7 +14,7 @@ class FlowSerializer(serializers.ModelSerializer):
 		parent_flow_ref=validated_data['parent_flow']
 		requestRef=self.context.get('request')
 		user=requestRef.user # logged in User 
-		print(validated_data)
+		#print(validated_data)
 		emptyFlow=Flow.objects.none()
 
 
@@ -30,24 +30,25 @@ class FlowSerializer(serializers.ModelSerializer):
 
 			#We now have access to the parent flow ID
 		
-			# Find who created this flow, they will be the given access of the new flow
+			
 
 			# Check if the current user has access to the parent flow
 
 			userHasAccess=UserFlow.doesUserHaveAccess(requestRef, parent_flow_id)
 			if(not userHasAccess):
-				raise PermissionDenied("You are not Authorised")
+				raise PermissionDenied("You are not authorised")
 
-
+			# Find who created this flow, they will be the given access of the new flow
 
 			parent_flow_object=UserFlow.objects.filter(flow=parent_flow_id, creator=True)
-			print(parent_flow_object)
+			#print(parent_flow_object)
 			if(parent_flow_object.count()==1):
-				parent_flow_creator=parent_flow_object[0].user				
+				parent_flow_creator=parent_flow_object[0].user
+				#updated the user object to the flow creator of the parent flow				
 				user=parent_flow_creator
 			else:
-				print("OK")
-				return emptyFlow
+				#print("OK")
+				raise NotFound("Requested resource does not exist")
 		
 		newFlowObject=Flow.objects.create(**validated_data)			
 		UserFlow.objects.create(user=user, flow=newFlowObject, creator=True)
