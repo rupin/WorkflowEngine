@@ -14,7 +14,7 @@ class FlowSerializer(serializers.ModelSerializer):
 		parent_flow_ref=validated_data['parent_flow']
 		requestRef=self.context.get('request')
 		user=requestRef.user # logged in User 
-		#print(validated_data)
+		
 		emptyFlow=Flow.objects.none()
 
 
@@ -50,6 +50,11 @@ class FlowSerializer(serializers.ModelSerializer):
 				#print("OK")
 				raise NotFound("Requested resource does not exist")
 		
-		newFlowObject=Flow.objects.create(**validated_data)			
+		newFlowObject=Flow.objects.create(**validated_data)	
 		UserFlow.objects.create(user=user, flow=newFlowObject, creator=True)
+
+		# Depending on WorkflowType property, the correct starting stage is figured out and the 
+		# flow is put on the correct track. 	
+		newFlowObject.putFlowOnTrack(user)	
+		
 		return newFlowObject

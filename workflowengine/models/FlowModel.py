@@ -23,5 +23,12 @@ class Flow(models.Model):
 		app_label="workflowengine"
 		ordering=['created_at']
 
-	
+	def putFlowOnTrack(self, user):
+		destination_state_id=self.flow_type.start_stage.id
+		self.river.stage.approve(as_user=user, next_state=destination_state_id, god_mod=True)
+
+
+
+
+
 
