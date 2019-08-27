@@ -4,6 +4,7 @@ from workflowengine.workflowserializers.RoleSerializer import RoleSerializer
 from workflowengine.models.UserFlowModel import UserFlow
 import uuid 
 from rest_framework.exceptions import PermissionDenied
+from workflowengine.hooks.myHooks import *
 
 class FlowSerializer(serializers.ModelSerializer):
 	
@@ -54,7 +55,14 @@ class FlowSerializer(serializers.ModelSerializer):
 		UserFlow.objects.create(user=user, flow=newFlowObject, creator=True)
 
 		# Depending on WorkflowType property, the correct starting stage is figured out and the 
-		# flow is put on the correct track. 	
+		# flow is put on the correct track. 
+		newFlowObject.river.stage.hook_post_transition(MyHook.my_callback_function)
+		newFlowObject.river.stage.hook_post_complete(MyHook.my_callback_function_oncomplete)
+		
+			
 		newFlowObject.putFlowOnTrack(user)	
+
+
+		
 		
 		return newFlowObject

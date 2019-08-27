@@ -23,7 +23,7 @@ class getFlowHistory(generics.ListAPIView):
 	permission_classes = [UserPermittedOnFlow]
 	def get_queryset(self):
 		flow_id=self.kwargs['flow_id']		
-		return TransitionApproval.objects.filter(object_id=flow_id)	
+		return TransitionApproval.objects.filter(object_id=flow_id, status=1).order_by('transaction_date')	
 		
 class availableTransitionApprovals(generics.ListAPIView):
 
