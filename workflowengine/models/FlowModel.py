@@ -17,14 +17,15 @@ class Flow(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	parent_flow = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
+	flow_name=models.CharField(max_length=50,default="",null=True, blank=True) 
 	def __str__(self):
-		return str(self.id)
+		return str(self.flow_name)
 	class Meta:
 		app_label="workflowengine"
 		ordering=['created_at']
 
 	def putFlowOnTrack(self, user):
-		destination_state_id=self.flow_type.start_stage.id
+		destination_state_id=self.flow_type.start_stage.id		
 		self.river.stage.approve(as_user=user, next_state=destination_state_id, god_mod=True)
 
 
