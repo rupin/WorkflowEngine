@@ -6,9 +6,9 @@ from workflowengine.models.UserFlowModel import UserFlow
 import uuid 
 from rest_framework.exceptions import PermissionDenied
 from workflowengine.hooks.myHooks import MyHook
-
+from django.conf import settings
 class FlowSerializer(serializers.ModelSerializer):
-	created_at = serializers.DateTimeField(format="%d %B, %Y", read_only=True)
+	created_at = serializers.DateTimeField(format=settings.SITE_DATE_FORMAT, read_only=True)
 	class Meta:
 		model = Flow
 		fields = "__all__"

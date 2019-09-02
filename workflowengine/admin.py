@@ -40,13 +40,17 @@ class WorkflowTypeAdmin(ImportExportModelAdmin):
 	model=WorkflowTypeModel.WorkflowType
 	list_display=['id','workflow_type','start_stage','primary']
 
+class RoleAdmin(ImportExportModelAdmin):
+	model=RoleModel.Role
+	list_display=['id','role','visible','index']
+
 
 admin.site.register(CustomUserModel.CustomUser, CustomUserAdmin)
 admin.site.register(FieldModel.Field)
 admin.site.register(FlowModel.Flow,FlowAdmin)
 admin.site.register(FormModel.Form)
 admin.site.register(FormFieldModel.FormField,FormFieldAdmin)
-admin.site.register(RoleModel.Role)
+admin.site.register(RoleModel.Role, RoleAdmin)
 admin.site.register(UserFlowModel.UserFlow,UserFlowAdmin)
 admin.site.register(FormDataModel.FormData,FormDataAdmin)
 

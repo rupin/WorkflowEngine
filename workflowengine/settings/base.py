@@ -92,8 +92,8 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',  # <-- And here
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication'
+        #'rest_framework.authentication.SessionAuthentication',
+        #'rest_framework.authentication.BasicAuthentication'
     ],
 
 }
@@ -107,7 +107,7 @@ RIVER_HOOKING_BACKEND = {
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -116,6 +116,8 @@ LOGIN_URL = '/login/'
 # my_project/settings.py
 LOGIN_REDIRECT_URL = '/profile'
 LOGOUT_REDIRECT_URL = '/'
+
+SITE_DATE_FORMAT=os.environ.get('DATE_FORMAT', '%d %B, %Y at %I:%M %p')
 
 
 # Static files (CSS, JavaScript, Images)
@@ -137,8 +139,6 @@ STATIC_DIR = os.path.join(PROJECT_ROOT, 'static')
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
 
 
 LOGIN_URL = '/login/'

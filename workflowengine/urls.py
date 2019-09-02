@@ -26,6 +26,7 @@ from workflowengine.apiviews.ExpertiseAPIView import *
 from workflowengine.apiviews.ExpertAPIView import *
 from workflowengine.riverapiviews.StateAPIView import *
 from workflowengine.riverapiviews.TransitionApprovalAPIView import *
+from workflowengine.apiviews.RoleAPIView import *
 import uuid
 
 
@@ -39,11 +40,11 @@ urlpatterns = [
 
 
     #Form Data and Fields
-    path('FormFieldsByStage/<int:stage>', FormFieldsByStage.as_view()),
-    path('getFieldDataByFlow/<int:flow_id>', FormDataView.as_view()),
+    path('FormFieldsByStage/<uuid:stage>', FormFieldsByStage.as_view()),
+    path('getFieldDataByFlow/<uuid:flow_id>', FormDataView.as_view()),
     #path('getFieldDataByStage/<int:flow_id>/<int:stage>', FormDataByStage.as_view()),
-    path('RetrieveUpdateFormData/<int:flow_id>/<int:pk>', RetrieveUpdateFormData.as_view()),
-    path('createFormData/<int:flow_id>', createFormData.as_view()),
+    path('RetrieveUpdateFormData/<uuid:flow_id>/<uuid:pk>', RetrieveUpdateFormData.as_view()),
+    path('createFormData/<uuid:flow_id>', createFormData.as_view()),
     
 
     #Workflow States
@@ -64,10 +65,11 @@ urlpatterns = [
 
     #Experts
     path('getExpertiseList/', getExpertise.as_view()),
-    path('getExpertise/<int:user>', getUserExpertInfo.as_view()),
+    path('getExpertise/<uuid:user>', getUserExpertInfo.as_view()),
 
     
-
+    #Roles
+    path('getRoles/', RoleAPIView. as_view()),
 
     
     

@@ -12,6 +12,6 @@ class ExpertSerializer(serializers.ModelSerializer):
 	#user=CustomUserSerializer()
 	class Meta:
 		model = Expert
-		fields = ['user','expertise']
+		fields = ['expertise']
 		
 		

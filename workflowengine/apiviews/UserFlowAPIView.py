@@ -19,6 +19,6 @@ class getCompletedFlows(generics.ListAPIView):
     serializer_class = FlowSerializer
     def get_queryset(self):
         logged_in_user = self.request.user
-        return UserFlow.objects.filter(Q(userflow__user=logged_in_user) & Q(completed=True)).order_by('-created_at')
+        return Flow.objects.filter(Q(userflow__user=logged_in_user) & Q(completed=True)).order_by('-created_at')
     	
     	
