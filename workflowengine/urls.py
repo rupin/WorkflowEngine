@@ -40,11 +40,11 @@ urlpatterns = [
 
 
     #Form Data and Fields
-    path('FormFieldsByStage/<uuid:stage>', FormFieldsByStage.as_view()),
-    path('getFieldDataByFlow/<uuid:flow_id>', FormDataView.as_view()),
+    path('FormFieldsByStage/<int:stage>', FormFieldsByStage.as_view()),
+    path('getFieldData/<uuid:flow_id>/<uuid:formfield>', FormDataView.as_view()),
     #path('getFieldDataByStage/<int:flow_id>/<int:stage>', FormDataByStage.as_view()),
-    path('RetrieveUpdateFormData/<uuid:flow_id>/<uuid:pk>', RetrieveUpdateFormData.as_view()),
-    path('createFormData/<uuid:flow_id>', createFormData.as_view()),
+    #path('RetrieveUpdateFormData/<uuid:flow_id>/<uuid:pk>', RetrieveUpdateFormData.as_view()),
+    path('createOrUpdateFormData/<uuid:flow_id>', createFormData.as_view()),
     
 
     #Workflow States

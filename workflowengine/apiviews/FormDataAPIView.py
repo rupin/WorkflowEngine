@@ -21,9 +21,10 @@ class FormDataView(generics.ListAPIView):
 	serializer_class = GenericFormDataSerializer
 	permission_classes = [UserPermittedOnFlow]
 	def get_queryset(self):
-		flow_id = self.kwargs['flow_id']		
+		flow_id = self.kwargs['flow_id']
+		formfield = self.kwargs['formfield']		
 		logged_in_user = self.request.user		
-		return FormData.objects.filter(flow=flow_id)
+		return FormData.objects.filter(flow=flow_id, formfield=formfield)
 
 class FormDataByStage(generics.ListAPIView):  
     
@@ -38,17 +39,17 @@ class FormDataByStage(generics.ListAPIView):
 
 
 
-class RetrieveUpdateFormData(generics.RetrieveUpdateAPIView):  
+# class RetrieveUpdateFormData(generics.RetrieveUpdateAPIView):  
     
-	serializer_class = GenericFormDataSerializer
-	permission_classes=[UserPermittedOnFlow]	
-	lookup_field='pk'
-	def get_queryset(self):
-		user = self.request.user
-		pk=self.kwargs['pk']
-		flow_id=self.kwargs['flow_id']
-		#flow_id=self.kwargs['flow_id']		
-		return FormData.objects.filter(id=pk, flow=flow_id)
+# 	serializer_class = GenericFormDataSerializer
+# 	permission_classes=[UserPermittedOnFlow]	
+# 	lookup_field='pk'
+# 	def get_queryset(self):
+# 		user = self.request.user
+# 		pk=self.kwargs['pk']
+# 		flow_id=self.kwargs['flow_id']
+# 		#flow_id=self.kwargs['flow_id']		
+# 		return FormData.objects.filter(id=pk, flow=flow_id)
 
 	
 

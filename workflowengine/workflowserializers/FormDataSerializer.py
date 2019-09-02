@@ -15,7 +15,24 @@ class FormDataSerializer(serializers.ModelSerializer):
 	
 	class Meta:
 		model = FormData
-		fields="__all__"
+		exclude=['user']
+	def create(self, validated_data):
+		requestRef=self.context.get('request')
+		user=requestRef.user # logged in User
+		validated_data['user']=user	
+
+
+		newFormDataObject, created = FormData.objects.update_or_create(
+			user=user,
+			formfield=validated_data.get('formfield'),
+			flow=validated_data.get('flow'),
+
+		defaults={'file': validated_data.get('file', None), 
+				   'text': validated_data.get('text', None)
+				  }
+				  )
+		return newFormDataObject	
+		
 
 	
 	
