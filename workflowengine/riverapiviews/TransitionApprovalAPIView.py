@@ -22,9 +22,11 @@ class getFlowHistory(generics.ListAPIView):
 	serializer_class = TransitionApprovalSerializer
 	permission_classes = [UserPermittedOnFlow]
 	def get_queryset(self):
-		flow_id=self.kwargs['flow_id']		
-		return TransitionApproval.objects.filter(object_id=flow_id, status=1).order_by('transaction_date')	
-		
+		flow_id=self.kwargs['flow_id']
+		transactionobject=TransitionApproval.objects.filter(object_id=flow_id, status=1).order_by('transaction_date').prefetch_related('transactioner', 'destination_state', 'source_state')	
+			
+		return transactionobject
+
 class availableTransitionApprovals(generics.ListAPIView):
 
 	serializer_class = TransitionApprovalSerializer
@@ -33,7 +35,7 @@ class availableTransitionApprovals(generics.ListAPIView):
 		flow_id=self.kwargs['flow_id']
 		flow=Flow.objects.get(id=flow_id)
 		newQS=[]	
-		transitionApprovals=flow.river.stage.get_available_approvals(as_user=self.request.user)
+		transitionApprovals=flow.river.stage.get_available_approvals(as_user=self.request.user).prefetch_related('transactioner')
 		# for transitionApproval in transitionApprovals:
 		# 	#transitionApprovals["isLastState"]=True
 		# 	#transitionApprovals["isFirstState"]=True

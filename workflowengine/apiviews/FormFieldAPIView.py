@@ -19,5 +19,5 @@ class FormFieldsByStage(generics.ListAPIView):
     def get_queryset(self):
         logged_in_user = self.request.user
         stage_id=self.kwargs['stage']   
-        fieldsData=FormField.objects.filter(stage=stage_id)
+        fieldsData=FormField.objects.filter(stage=stage_id).prefetch_related('field')
         return fieldsData

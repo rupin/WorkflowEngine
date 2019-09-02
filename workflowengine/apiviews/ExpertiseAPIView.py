@@ -9,4 +9,4 @@ from rest_framework import generics
 class getExpertise(generics.ListAPIView):   
     
     serializer_class = ExpertiseSerializer
-    queryset=Expertise.objects.all()
+    queryset=Expertise.objects.all().prefetch_related('expertise')

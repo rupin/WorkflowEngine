@@ -11,4 +11,4 @@ class getUserExpertInfo(generics.ListAPIView):
     serializer_class = ExpertSerializer
     def get_queryset(self):
     	user=self.kwargs['user']
-    	return Expert.objects.filter(user=user)
+    	return Expert.objects.filter(user=user).prefetch_related('user')

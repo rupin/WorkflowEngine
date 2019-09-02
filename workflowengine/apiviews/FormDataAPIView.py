@@ -24,7 +24,7 @@ class FormDataView(generics.ListAPIView):
 		flow_id = self.kwargs['flow_id']
 		formfield = self.kwargs['formfield']		
 		logged_in_user = self.request.user		
-		return FormData.objects.filter(flow=flow_id, formfield=formfield)
+		return FormData.objects.filter(flow=flow_id, formfield=formfield).prefetch_related('formfield')
 
 class FormDataByStage(generics.ListAPIView):  
     
