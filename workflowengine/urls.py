@@ -27,6 +27,7 @@ from workflowengine.apiviews.ExpertAPIView import *
 from workflowengine.riverapiviews.StateAPIView import *
 from workflowengine.riverapiviews.TransitionApprovalAPIView import *
 from workflowengine.apiviews.RoleAPIView import *
+from workflowengine.apiviews.CustomUserAPIView import *
 import uuid
 
 
@@ -71,6 +72,9 @@ urlpatterns = [
     #Roles
     path('getRoles/', RoleAPIView. as_view()),
 
+    #profile
+    path('createOrUpdatePIN/<uuid:pk>', AddUpdatePin.as_view()),
+    path('validatePIN/<int:pin>', ValidatePin.as_view()),
     
     
     

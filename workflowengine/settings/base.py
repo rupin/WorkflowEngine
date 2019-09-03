@@ -97,6 +97,9 @@ REST_FRAMEWORK = {
     ],
 
 }
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+    )
 
 RIVER_HOOKING_BACKEND = {
     'backend':'river.hooking.backends.database.DatabaseHookingBackend',
