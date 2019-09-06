@@ -44,9 +44,13 @@ class RoleAdmin(ImportExportModelAdmin):
 	model=RoleModel.Role
 	list_display=['id','role_name','visible','index']
 
+class FieldAdmin(ImportExportModelAdmin):
+	model=FieldModel.Field
+	list_display=['id', 'label', 'field_type', 'flow_type']
+
 
 admin.site.register(CustomUserModel.CustomUser, CustomUserAdmin)
-admin.site.register(FieldModel.Field)
+admin.site.register(FieldModel.Field, FieldAdmin)
 admin.site.register(FlowModel.Flow,FlowAdmin)
 admin.site.register(FormModel.Form)
 admin.site.register(FormFieldModel.FormField,FormFieldAdmin)

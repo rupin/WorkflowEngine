@@ -12,6 +12,8 @@ class FlowSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Flow
 		fields = "__all__"
+
+		
 	def create(self, validated_data):
 		parent_flow_ref=validated_data['parent_flow']
 		flow_type=validated_data['flow_type']
