@@ -70,11 +70,12 @@ urlpatterns = [
 
     
     #Roles
-    path('getRoles/', RoleAPIView. as_view()),
+    path('getRoles/', RoleAPIView.as_view()),
 
     #profile
     path('createOrUpdatePIN/<uuid:pk>', AddUpdatePin.as_view()),
     path('validatePIN/<int:pin>', ValidatePin.as_view()),
+    path('createNewUser/', UserCreateAPIView.as_view())
     
     
     

@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
 	profilePhoto=models.FileField(null=True)
 	dateOfBirth=models.DateField(null=True)
 	role=models.ForeignKey(Role, on_delete=models.CASCADE, null=True)
-	restriction_pin=models.CharField(max_length=128, verbose_name='restriction_pin')		
+	restriction_pin=models.CharField(max_length=128, verbose_name='restriction_pin', blank=True, null=True)		
 	# add additional fields in here
 	class Meta:
 		app_label="workflowengine"

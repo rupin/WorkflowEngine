@@ -42,7 +42,7 @@ class WorkflowTypeAdmin(ImportExportModelAdmin):
 
 class RoleAdmin(ImportExportModelAdmin):
 	model=RoleModel.Role
-	list_display=['id','role','visible','index']
+	list_display=['id','role_name','visible','index']
 
 
 admin.site.register(CustomUserModel.CustomUser, CustomUserAdmin)

@@ -11,6 +11,14 @@ from django.core.exceptions import SuspiciousOperation
 from django.contrib.auth.hashers import make_password
 
 
+from rest_framework.permissions import AllowAny
+
+from django.contrib.auth.models import Group
+
+from workflowengine.models.RoleModel import Role
+
+
+
 class CustomUserSerializer(serializers.ModelSerializer):
 	role=RoleSerializer()	
 	class Meta:
@@ -66,6 +74,54 @@ class PINValidationSerializer(serializers.Serializer):
 	PIN_accepted=serializers.BooleanField()
 	class Meta:		
 		fields=['PIN_accepted']
+
+
+
+
+
+
+
+
+class CustomUserCreateSerializer(serializers.ModelSerializer):
+	password = serializers.CharField(write_only=True)
+	#ole=RoleSerializer()
+
+	class Meta:
+		model = CustomUser
+		#exclude=['restriction_pin', 'profilePhoto','dateOfBirth', 'user_permissions','last_login', 'is_staff', 'is_active', 'date_joined', 'groups', 'is_superuser']
+		fields=['username', 'password', 'email', 'role']
+
+	def create(self, validated_data):
+		user = super(CustomUserCreateSerializer, self).create(validated_data)
+		user.set_password(validated_data['password'])
+		user.is_active=True
+		user.is_superuser=False
+		user.is_staff=False
+		chosen_role=validated_data['role']
+
+		
+		if(type(chosen_role)==Role):
+			role_id=chosen_role.id
+		else:
+			role_id=chosen_role
+
+		if(chosen_role):
+			roleObj=Role.objects.filter(id=role_id)        	
+		else:
+			roleObj=Role.objects.filter(primary=True)
+
+
+		if(roleObj.count()==1):
+			user.role=roleObj[0]
+			role_name=roleObj[0].role_name
+			# add user to the group matching its role.
+			group=Group.objects.filter(name=role_name)
+			#print(group)
+			if(group.count()==1):
+				user.groups.add(group[0]) 
+
+		user.save()
+		return user
 	
 
 	

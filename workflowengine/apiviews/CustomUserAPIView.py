@@ -45,6 +45,11 @@ class ValidatePin(generics.ListAPIView):
 			
 		statusList.append(obj)		
 		return statusList
+		
+class UserCreateAPIView(generics.CreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserCreateSerializer
+    permission_classes = [AllowAny]
 
 	
 	
