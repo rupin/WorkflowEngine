@@ -60,6 +60,14 @@ if GOOGLE_STORAGE:
 	GS_CREDENTIALS = service_account.Credentials.from_service_account_info(service_account_info)
 	GS_PROJECT_ID=service_account_info["project_id"]
 
+CELERY_BROKER_URL=os.environ['REDIS_URL']
+CELERY_RESULT_BACKEND=os.environ['REDIS_URL']
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

@@ -22,7 +22,7 @@ class FlowAdmin(ImportExportModelAdmin):
 
 class FormFieldAdmin(ImportExportModelAdmin):
 	model=FormFieldModel.FormField
-	list_display=['id','form','field', 'stage','index', 'mandatory']
+	list_display=['id','form','field', 'stage','index', 'mandatory', 'expert_search_criteria', 'include_in_summary']
 
 class UserFlowAdmin(ImportExportModelAdmin):
 	model=UserFlowModel.UserFlow
@@ -46,7 +46,7 @@ class RoleAdmin(ImportExportModelAdmin):
 
 class FieldAdmin(ImportExportModelAdmin):
 	model=FieldModel.Field
-	list_display=['id', 'label', 'field_type', 'flow_type']
+	list_display=['label', 'field_type', 'multichoice_options','flow_type']
 
 
 admin.site.register(CustomUserModel.CustomUser, CustomUserAdmin)

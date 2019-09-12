@@ -6,5 +6,5 @@ class FieldSerializer(serializers.ModelSerializer):
 	flow_type=WorkflowTypeSerializer()
 	class Meta:
 		model = Field
-		fields = "__all__"
+		exclude = ["id"]
 		depth=1

@@ -152,5 +152,7 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 GOOGLE_STORAGE=True
 
+CELERY_IMPORTS = ("workflowengine.bg_tasks", )
+
 
 

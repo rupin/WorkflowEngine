@@ -30,6 +30,9 @@ class Field(models.Model):
 						('LOCATION', 'LOCATION'),
 						('SKIP_STEP_BUTTON', 'SKIP_STEP_BUTTON'),
 						('API_DATA_DROPDOWN', 'API_DATA_DROPDOWN'),
+						('TIME_DELTA', 'TIME_DELTA'),
+						('PRICE', 'PRICE'),
+						('EXPERT', 'EXPERT'),
 
 				)
 
@@ -40,7 +43,7 @@ class Field(models.Model):
 	flow_type=models.ForeignKey(WorkflowType, on_delete=models.PROTECT, blank=True, null=True)	
 
 	def __str__(self):
-		return self.description
+		return self.label
 
 
 	class Meta:		

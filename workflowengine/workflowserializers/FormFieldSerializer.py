@@ -3,7 +3,7 @@ from rest_framework import serializers
 from workflowengine.workflowserializers.FieldSerializer import FieldSerializer
 
 class FormFieldSerializer(serializers.ModelSerializer):
-	#field= FieldSerializer()
+	field= FieldSerializer()
 	class Meta:
 		model = FormField
 		fields = ['field', 'id', 'mandatory', 'index']
