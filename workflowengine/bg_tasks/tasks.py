@@ -19,4 +19,4 @@ def download(url, filename):
 @task
 def list():
     """ Return an array of all downloaded files """
-    return CustomUser.objects.all()
+    return 5
