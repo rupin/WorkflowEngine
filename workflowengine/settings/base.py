@@ -1,7 +1,7 @@
 import os
 
 from pathlib import Path
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', default=True)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).parent.parent
