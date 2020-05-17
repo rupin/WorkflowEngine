@@ -8,7 +8,8 @@ import river.models.fields.state
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('river', '0002_auto_20200517_2124'),
+   # Lets try commenting out the faulty migration and see if it works
+        #('river', '0002_auto_20200517_2124'),
         ('workflowengine', '0001_initial'),
     ]
 
