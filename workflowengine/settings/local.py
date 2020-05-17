@@ -44,7 +44,7 @@ SECURE_SSL_REDIRECT = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',                      
+        'NAME': 'workflowengine',                      
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
