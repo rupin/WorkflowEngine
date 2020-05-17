@@ -75,9 +75,11 @@ urlpatterns = [
     #profile
     path('createOrUpdatePIN/<uuid:pk>', AddUpdatePin.as_view()),
     path('validatePIN/<int:pin>', ValidatePin.as_view()),
-    path('createNewUser/', UserCreateAPIView.as_view())
+    path('createNewUser/', UserCreateAPIView.as_view()),
+    #url('radmin/', include("river_admin.urls")),
     
     
     
     
 ]
+

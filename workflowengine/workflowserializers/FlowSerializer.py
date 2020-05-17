@@ -2,6 +2,7 @@ from workflowengine.models.FlowModel import Flow
 from workflowengine.models.WorkflowTypeModel import WorkflowType
 from rest_framework import serializers
 from workflowengine.workflowserializers.RoleSerializer import RoleSerializer
+from workflowengine.riverserializers.StateSerializer import StateSerializer
 from workflowengine.models.UserFlowModel import UserFlow
 import uuid 
 from rest_framework.exceptions import PermissionDenied
@@ -9,9 +10,12 @@ from workflowengine.hooks.myHooks import MyHook
 from django.conf import settings
 class FlowSerializer(serializers.ModelSerializer):
 	created_at = serializers.DateTimeField(format=settings.SITE_DATE_FORMAT, read_only=True)
+	updated_at = serializers.DateTimeField(format=settings.SITE_DATE_FORMAT, read_only=True)
+	stage=StateSerializer(read_only=True)
 	class Meta:
 		model = Flow
 		fields = "__all__"
+
 
 		
 	def create(self, validated_data):
@@ -62,13 +66,13 @@ class FlowSerializer(serializers.ModelSerializer):
 		newFlowObject=Flow.objects.create(**validated_data)	
 		UserFlow.objects.create(user=user, flow=newFlowObject, creator=True)
 
-		newFlowObject.river.stage.hook_post_transition(MyHook.my_callback_function)
-		newFlowObject.river.stage.hook_post_complete(MyHook.my_callback_function_oncomplete)
+		#newFlowObject.river.stage.hook_post_transition(MyHook.my_callback_function)
+		#newFlowObject.river.stage.hook_post_complete(MyHook.my_callback_function_oncomplete)
 		
 		
 		# Depending on WorkflowType property, the correct starting stage is figured out and the 
 		# flow is put on the correct track. 
-		newFlowObject.putFlowOnTrack(user)
+		#newFlowObject.putFlowOnTrack(user)
 		
 		
 		return newFlowObject

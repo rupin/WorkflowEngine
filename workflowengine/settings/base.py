@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'river_admin'
 ]
 
 MIDDLEWARE = [
@@ -95,6 +96,7 @@ REST_FRAMEWORK = {
         #'rest_framework.authentication.SessionAuthentication',
         #'rest_framework.authentication.BasicAuthentication'
     ],
+    'EXCEPTION_HANDLER': 'river_admin.views.exception_handler'
 
 }
 AUTHENTICATION_BACKENDS = (
