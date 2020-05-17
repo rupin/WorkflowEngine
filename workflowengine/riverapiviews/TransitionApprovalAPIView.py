@@ -82,6 +82,7 @@ class approveStage(APIView):
 
 		except Exception as e:
 			error={}
+			print(e)
 			error['message']=str(e)
 			error['message_type']='Exception'
 			errorcode=HTTP_403_FORBIDDEN

@@ -24,9 +24,12 @@ class StageFieldValidator():
 		user=request.user		
 		pendingStageApproval=flow.river.stage.get_available_approvals(as_user=user)
 		destination_state=None
+		#print(pendingStageApproval.__dict__)
 		if(pendingStageApproval.count()==1):
-			destination_state=pendingStageApproval[0].destination_state_id
-			source_stage=pendingStageApproval[0].source_state_id
+			#print("ok")
+			destination_state=pendingStageApproval[0].transition.destination_state
+			#print("nokay")
+			source_stage=pendingStageApproval[0].transition.source_state
 			return source_stage,destination_state
 
 		if(pendingStageApproval.count()==0):			
@@ -35,8 +38,8 @@ class StageFieldValidator():
 		validState=False	
 		for pendingStage in pendingStageApproval:
 			#print("I have more than one state")
-			destination_state=pendingStage.destination_state_id
-			source_stage=pendingStage.source_state_id
+			destination_state=pendingStage.transition.destination_state
+			source_stage=pendingStage.transition.source_state
 			#print(requestedDestinationStage)
 			#print(destination_state)
 			if(destination_state==requestedDestinationStage):
