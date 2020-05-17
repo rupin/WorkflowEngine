@@ -9,7 +9,7 @@ import uuid
 
 class WorkflowType(models.Model):
 	workflow_type=models.CharField(max_length=20)
-	#start_stage=models.ForeignKey(State, on_delete=models.CASCADE,null=True, blank=True)	
+	start_stage=models.ForeignKey(State, on_delete=models.CASCADE,null=True, blank=True)	
 	primary=models.BooleanField(default=False)
 	def __str__(self):
 		return self.workflow_type
