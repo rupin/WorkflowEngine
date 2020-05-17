@@ -4,5 +4,3 @@ staticfiles
 .env
 *.sqlite3
 credentials
-
-
