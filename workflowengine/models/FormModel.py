@@ -10,7 +10,7 @@ import uuid
 
 class Form(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)	
-	stage=models.ForeignKey(State, on_delete=models.CASCADE, null=True)
+	#stage=models.ForeignKey(State, on_delete=models.CASCADE, null=True)
 	description=models.CharField(max_length=200,default="")
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
