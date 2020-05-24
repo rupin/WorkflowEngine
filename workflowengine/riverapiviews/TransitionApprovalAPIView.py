@@ -23,7 +23,7 @@ class getFlowHistory(generics.ListAPIView):
 	permission_classes = [UserPermittedOnFlow]
 	def get_queryset(self):
 		flow_id=self.kwargs['flow_id']
-		transactionobject=TransitionApproval.objects.filter(object_id=flow_id, status=1).order_by('transaction_date').prefetch_related('transactioner', 'destination_state', 'source_state')	
+		transactionobject=TransitionApproval.objects.filter(object_id=flow_id, status="approved").order_by('transaction_date').prefetch_related('transactioner', "transition")	
 			
 		return transactionobject
 

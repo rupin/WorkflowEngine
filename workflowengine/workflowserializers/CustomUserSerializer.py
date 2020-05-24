@@ -17,6 +17,11 @@ from django.contrib.auth.models import Group
 
 from workflowengine.models.RoleModel import Role
 
+class LimitedUserSerializer(serializers.ModelSerializer):
+	
+	class Meta:
+		model = CustomUser		
+		fields=['first_name', 'last_name']
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
